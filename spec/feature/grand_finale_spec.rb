@@ -1,4 +1,6 @@
 require 'capybara/rspec'
+require 'airport'
+require 'plane'
 
 ## Note these are just some guidelines!
 ## Feel free to write more tests!!
@@ -9,7 +11,22 @@ require 'capybara/rspec'
 # Once all planes are in the air again, check that they have status "flying!"
 
 feature 'Grand Finale' do
-
-  xscenario 'all planes can land and all planes can take off'
-
+  scenario 'planes can land and all planes can take off' do
+    airport = Airport.new
+    plane = Plane.new
+    airport.land(plane)
+    plane.take_off_from(airport)
+    plane.land_to(airport)
+    expect(airport.planes).to eq([plane])
+  end
+  scenario 'planes can take off from an airport and land in a different one' do
+    airport = Airport.new
+    another_airport = Airport.new
+    plane = Plane.new
+    airport.land(plane)
+    plane.take_off_from(airport)
+    plane.land_to(another_airport)
+    expect(airport.planes).to eq([])
+    expect(another_airport.planes).to eq([plane])
+  end
 end

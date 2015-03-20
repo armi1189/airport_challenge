@@ -16,12 +16,31 @@ describe Plane do
 
   context 'when created' do
     it { is_expected.not_to be_flying }
+    it 'can land' do
+      expect(subject).to respond_to :land_to
+    end
+    it 'can take off' do
+      expect(subject).to respond_to :take_off_from
+    end
   end
 
-  it 'has a flying status when in the air'
+  context 'after take off' do
+    it 'is expected to by flying' do
+      airport = double :airport, planes: [subject]
+      expect(airport).to receive(:take_off).and_return([subject])
+      subject.take_off_from(airport)
+      expect(subject).to be_flying
+    end
+  end
 
-  it 'can take off'
-
-  it 'changes its status to flying after taking off'
-
+  context 'after landed' do
+    it 'is expected not to be flying' do
+      airport = double :airport, planes: [subject]
+      expect(airport).to receive(:take_off).and_return([subject])
+      expect(airport).to receive(:land).and_return([subject])
+      subject.take_off_from(airport)
+      subject.land_to(airport)
+      expect(subject).not_to be_flying
+    end
+  end
 end
