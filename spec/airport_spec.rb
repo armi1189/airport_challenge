@@ -28,7 +28,21 @@ describe Airport do
 
   context 'traffic control' do
 
-    xit 'a plane cannot land if the airport is full'
+    it 'a plane cannot land if the airport is full' do
+      30.times { subject.land :plane }
+      expect { subject.land :plane }.to raise_error 'Airport is Full'
+    end
+
+    it 'can calculate available room after landing' do
+      15.times { subject.land :plane }
+      expect(subject.available_room).to eq 15
+    end
+
+    it 'can calculate available room after take off' do
+      20.times { subject.land :plane }
+      7.times { subject.take_off :plane }
+      expect(subject.available_room).to eq 17
+    end
 
     # Include a weather condition.
     # The weather must be random and only have two states "sunny" or "stormy".
