@@ -14,12 +14,14 @@ require 'plane'
 
 describe Plane do
 
-  xit 'has a flying status when created'
+  context 'when created' do
+    it { is_expected.not_to be_flying }
+  end
 
-  xit 'has a flying status when in the air'
+  it 'has a flying status when in the air'
 
-  xit 'can take off'
+  it 'can take off'
 
-  xit 'changes its status to flying after taking off'
+  it 'changes its status to flying after taking off'
 
 end

@@ -15,9 +15,13 @@ describe Airport do
 
   context 'taking off and landing' do
 
-    xit 'a plane can land'
-
+    it 'a plane can land' do
+      plane = double :plane, flying?: false
+      subject.land(plane)
+      expect(subject.planes).to eq([plane])
+    end
     xit 'a plane can take off'
+
   end
 
   context 'traffic control' do
