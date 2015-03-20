@@ -15,13 +15,13 @@ describe Plane do
   context 'after take off' do
     it 'is expected to by flying' do
       airport = double :airport, planes: [subject]
-      expect(airport).to receive(:take_off).and_return([subject])
+      expect(airport).to receive(:unpark).and_return([subject])
       subject.take_off_from(airport)
       expect(subject).to be_flying
     end
     it 'cannot take off again' do
       airport = double :airport
-      expect(airport).to receive(:take_off).and_return([subject])
+      expect(airport).to receive(:unpark).and_return([subject])
       subject.take_off_from(airport)
       expect { subject.take_off_from(airport) }.to raise_error 'Plane is flying'
     end
@@ -30,16 +30,16 @@ describe Plane do
   context 'after landed' do
     it 'is expected not to be flying' do
       airport = double :airport, planes: [subject]
-      expect(airport).to receive(:take_off).and_return([subject])
-      expect(airport).to receive(:land).and_return([subject])
+      expect(airport).to receive(:unpark).and_return([subject])
+      expect(airport).to receive(:park).and_return([subject])
       subject.take_off_from(airport)
       subject.land_to(airport)
       expect(subject).not_to be_flying
     end
     it 'cannot land again' do
       airport = double :airport, planes: [subject]
-      expect(airport).to receive(:take_off).and_return([subject])
-      expect(airport).to receive(:land).and_return([subject])
+      expect(airport).to receive(:unpark).and_return([subject])
+      expect(airport).to receive(:park).and_return([subject])
       subject.take_off_from(airport)
       subject.land_to(airport)
       expect { subject.land_to(airport) }.to raise_error 'Plane is not flying'

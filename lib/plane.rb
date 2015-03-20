@@ -8,13 +8,21 @@ class Plane
 
   def land_to airport
     fail 'Plane is not flying' if flying? == false
+    airport.park(self)
     @flying = false
-    airport.land(self)
+    "#{self} has landed in #{airport}"
   end
 
   def take_off_from airport
     fail 'Plane is flying' if flying?
+    airport.unpark(self)
     @flying = true
-    airport.take_off(self)
+    "#{self} took off from #{airport}"
+  end
+
+  def travel_from_to from, to
+    take_off_from(from)
+    land_to(to)
+    "#{self} travelled from #{from} to #{to}"
   end
 end

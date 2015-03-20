@@ -2,43 +2,43 @@ require 'airport'
 
 describe Airport do
 
-  context 'taking off and landing' do
+  context 'taking off and parking' do
 
-    it 'a plane can land' do
-      subject.land(:plane)
+    it 'a plane can park' do
+      subject.park(:plane)
       expect(subject.planes).to eq([:plane])
     end
-    it 'a plane cannot land twice' do
-      subject.land(:plane)
-      expect { subject.land :plane }.to raise_error 'Plane is in the airport'
+    it 'a plane cannot be parked twice' do
+      subject.park(:plane)
+      expect { subject.park :plane }.to raise_error 'Plane is in the airport'
     end
-    it 'a plane can take off' do
-      subject.land(:plane)
-      subject.take_off(:plane)
+    it 'a plane can unpark' do
+      subject.park(:plane)
+      subject.unpark(:plane)
       expect(subject.planes).to eq([])
     end
-    it 'a plane cannot take off twice' do
-      subject.land(:plane)
-      subject.take_off(:plane)
-      expect { subject.take_off :plane }.to raise_error "Plane isn't in airport"
+    it 'a plane cannot unpark twice' do
+      subject.park(:plane)
+      subject.unpark(:plane)
+      expect { subject.unpark :plane }.to raise_error "Plane isn't in airport"
     end
   end
 
   context 'traffic control' do
 
-    it 'a plane cannot land if the airport is full' do
-      (1..30).each { |x| subject.land x }
-      expect { subject.land :plane }.to raise_error 'Airport is Full'
+    it 'a plane cannot park if the airport is full' do
+      (1..30).each { |x| subject.park x }
+      expect { subject.park :plane }.to raise_error 'Airport is Full'
     end
 
-    it 'can calculate available room after landing' do
-      (1..15).each { |x| subject.land x }
+    it 'can calculate available room after parking' do
+      (1..15).each { |x| subject.park x }
       expect(subject.available_room).to eq 15
     end
 
-    it 'can calculate available room after take off' do
-      (1..20).each { |x| subject.land x }
-      (1..7).each { |x| subject.take_off x }
+    it 'can calculate available room after unparking' do
+      (1..20).each { |x| subject.park x }
+      (1..7).each { |x| subject.unpark x }
       expect(subject.available_room).to eq 17
     end
 
@@ -52,8 +52,8 @@ describe Airport do
     # the plane can not land, and must not be in the airport
 
     context 'weather conditions' do
-      xit 'a plane cannot take off when there is a storm brewing'
 
+      xit 'a plane cannot take off when there is a storm brewing'
       xit 'a plane cannot land in the middle of a storm'
     end
   end

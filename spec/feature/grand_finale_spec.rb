@@ -14,7 +14,7 @@ feature 'Grand Finale' do
   scenario 'planes can land and all planes can take off' do
     airport = Airport.new
     plane = Plane.new
-    airport.land(plane)
+    airport.park(plane)
     plane.take_off_from(airport)
     plane.land_to(airport)
     expect(airport.planes).to eq([plane])
@@ -24,7 +24,7 @@ feature 'Grand Finale' do
     airport = Airport.new
     another_airport = Airport.new
     plane = Plane.new
-    airport.land(plane)
+    airport.park(plane)
     plane.take_off_from(airport)
     plane.land_to(another_airport)
     expect(airport.planes).to eq([])
