@@ -7,11 +7,13 @@ class Plane
   end
 
   def land_to airport
+    fail 'Plane is not flying' if flying? == false
     @flying = false
     airport.land(self)
   end
 
   def take_off_from airport
+    fail 'Plane is flying' if flying?
     @flying = true
     airport.take_off(self)
   end

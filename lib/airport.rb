@@ -10,12 +10,18 @@ class Airport
   end
 
   def land plane
-    fail 'Airport is Full' if full?
-    @available_room -= 1
-    planes << plane
+    if full?
+      fail 'Airport is Full'
+    elsif planes.include?(plane)
+      fail 'Plane is in the airport'
+    else
+      @available_room -= 1
+      planes << plane
+    end
   end
 
   def take_off plane
+    fail "Plane isn't in airport" unless planes.include?(plane)
     @available_room += 1
     planes.delete(plane)
   end

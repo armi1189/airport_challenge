@@ -18,6 +18,7 @@ feature 'Grand Finale' do
     plane.take_off_from(airport)
     plane.land_to(airport)
     expect(airport.planes).to eq([plane])
+    expect(plane).not_to be_flying
   end
   scenario 'planes can take off from an airport and land in a different one' do
     airport = Airport.new
