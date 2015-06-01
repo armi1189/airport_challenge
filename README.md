@@ -1,6 +1,7 @@
 Airport Challenge
 =================
-
+[![Code Climate](https://codeclimate.com/github/armi1189/airport_challenge/badges/gpa.svg)](https://codeclimate.com/github/armi1189/airport_challenge)
+--------
 Instructions
 ---------
 
